@@ -1,0 +1,11 @@
+{
+  "name": "jd-apis",
+  "version": "2.0.0",
+  "description": "JdApis 的 h5st、设备参数与 JCAP 本地运行时",
+  "main": "static/h5st5_server.js",
+  "private": true,
+  "dependencies": {
+    "@napi-rs/canvas": "^0.1.80",
+    "jsdom": "^25.0.1"
+  }
+}
