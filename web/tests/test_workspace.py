@@ -137,5 +137,13 @@ class WorkspaceTests(unittest.TestCase):
         with self.assertRaises(ValueError):DemoPlatform().connect('secret-cookie')
         with self.assertRaises(ValueError):DemoPlatform().qr_start()
 
+    def test_comments_from_saved_owned_snapshot(self):
+        item=fixtures()[0]
+        self.service.put('item',item)
+        job=self.post('/api/comments',{'id':item['id'],'request_id':'saved-comment-check'}).json
+        self.assertEqual(self.wait(job)['status'],'completed')
+        self.platform.account={'id':'another-owner','name':'Other'}
+        self.assertEqual(self.post('/api/comments',{'id':item['id'],'request_id':'other-comment-check'}).status_code,404)
+
 
 if __name__=='__main__':unittest.main()

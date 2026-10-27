@@ -135,7 +135,7 @@ class Platform:
         if name=='orders':
             raw=JdAPI.get_order_list(self.client(),page=page,date_range=str(data.get('range','1')))
             checked(raw)
-            items=[{'id':'order-'+x['orderId'],'title':' / '.join(x.get('products') or ['订单 '+x['orderId']]),'author':'订单 '+x['orderId'],
+            items=[{'id':'order-'+x['orderId'],'kind':'order','title':' / '.join(x.get('products') or ['订单 '+x['orderId']]),'author':'订单 '+x['orderId'],
                 'text':f"{x.get('status','')} · {x.get('time','')}",'url':x['url'],'price':x.get('amount','').replace('¥',''),
                 'views':'—','likes':'—','comments':0,'uid':'','cover':'','tags':'','note':''} for x in raw.get('orders') or []]
             return {'items':items,'notice':'只读取订单列表；未执行下单、支付或订单修改'}
